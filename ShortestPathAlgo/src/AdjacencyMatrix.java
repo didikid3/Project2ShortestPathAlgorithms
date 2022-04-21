@@ -15,6 +15,7 @@ public class AdjacencyMatrix {
 		range = r;
 		matrix = new int[size][size];
 		setFullNull();
+		setDiag();
 	}
 	
 	//Sets entire matrix to have no edges
@@ -26,6 +27,13 @@ public class AdjacencyMatrix {
 		}
 	}
 	
+	public void setDiag() {
+		for(int i = 0; i < size; i++) {
+			for(int j = i; j <= i; j++) {
+				matrix[i][j] = 0;
+			}
+		}
+	}
 	//Randomly creates edges between nodes
 	public void generateRandom()
 	{
@@ -45,6 +53,7 @@ public class AdjacencyMatrix {
 				}
 			}
 		}
+		setDiag();
 	}
 	
 	//Set a specific edge description for 2 nodes
@@ -71,6 +80,7 @@ public class AdjacencyMatrix {
 		
 		matrix = tempMatrix;
 		size += 1;
+		setDiag();
 	}
 	
 	public int[][] getMatrix(){
@@ -100,7 +110,7 @@ public class AdjacencyMatrix {
 	
 	
 	public static void main(String[] args){
-		AdjacencyMatrix x = new AdjacencyMatrix();
+		AdjacencyMatrix x = new AdjacencyMatrix(5);
 		
 		x.generateRandom();
 		System.out.print(x);

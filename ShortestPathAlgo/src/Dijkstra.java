@@ -42,13 +42,14 @@ public class Dijkstra {
  				}
 			}
 			
-			printCost(distance,visited, parent);
+			
 		}
-
+		
+		printCost(distance,visited, parent);
 		
 	}
 	
-	public static void printCost(int[] distance, boolean[] visited, int[] parent) {
+	public static void printDist(int[] distance, boolean[] visited, int[] parent) {
 		for(int i=0; i < distance.length; i++) {
 			if(distance[i] != Integer.MAX_VALUE)
 				System.out.print(distance[i] + "\t");
@@ -56,20 +57,45 @@ public class Dijkstra {
 				System.out.print("INF\t");
 		}
 		System.out.print("\n");
+	}
+	
+	public static void printVisited(int[] distance, boolean[] visited, int[] parent) {
 		for(int i=0; i < distance.length; i++) {
 			System.out.print(visited[i] + "\t");
 		}
 		System.out.print("\n");
+	}
+	
+	public static void printParent(int[] distance, boolean[] visited, int[] parent) {
 		for(int i=0; i < distance.length; i++) {
 			System.out.print(parent[i] + "\t");
 		}
 		System.out.print("\n");
-		System.out.println("------------------------------------------------------------");
 	}
 	
+	public static void printCost(int[] distance, boolean[] visited, int[] parent) {
+		printDist(distance, visited, parent);
+		//printVisited(distance, visited, parent);
+		//printParent(distance, visited, parent);
+		System.out.println("-----------------------------------------------------------------------------");
+	}
+	
+	public static void printAllPairsDijkstra(int[][] adjacencyMatrix) {
+		System.out.print("\t");
+		for(int i =0; i < adjacencyMatrix.length; i++) {
+			System.out.print((i+1)+"\t");
+		}
+		System.out.println("\n-----------------------------------------------------------------------------");
+		for(int i = 0; i < adjacencyMatrix.length; i++) {
+			System.out.print("ROW " + (i+1) + "|\t");
+			dijkstra(adjacencyMatrix, i);
+		}
+	}
 	
 	public static void main(String[] args) {
-		int[][] adjacencyMatrix = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+		int[][] adjacencyMatrix =
+			{
+			    { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
                 { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
                 { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
                 { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
@@ -77,8 +103,9 @@ public class Dijkstra {
                 { 0, 0, 4, 0, 10, 0, 2, 0, 0 },
                 { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
                 { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
-                { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+                { 0, 0, 2, 0, 0, 0, 6, 7, 0 }
+            };
 		
-		dijkstra(adjacencyMatrix, 0);
+		printAllPairsDijkstra(adjacencyMatrix);
 	}
 }
