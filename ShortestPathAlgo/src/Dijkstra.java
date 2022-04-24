@@ -1,7 +1,7 @@
 
 public class Dijkstra {
 
-	public static void dijkstra(int[][] graph, int srcNode) {
+	public static int[] dijkstra(int[][] graph, int srcNode) {
 		int size = graph.length;
 		
 		int[] distance = new int[size];
@@ -21,6 +21,7 @@ public class Dijkstra {
 			int nearest = -1;
 			int minDist = Integer.MAX_VALUE;
 			
+			//Min Distance
 			for (int vertexIndex = 0; vertexIndex < size; vertexIndex++) {
 				if(!visited[vertexIndex] &&
 						distance[vertexIndex] < minDist) {
@@ -34,7 +35,7 @@ public class Dijkstra {
 			for (int vertexIndex = 0; vertexIndex < size; vertexIndex++) {
 				int dist = graph[nearest][vertexIndex];
 				
-				if(dist > 0 &&
+				if(dist !=0 && dist != Integer.MAX_VALUE && 
 						( (minDist + dist) < distance[vertexIndex] )
 				  ) {
 					parent[vertexIndex] = nearest;
@@ -45,11 +46,11 @@ public class Dijkstra {
 			
 		}
 		
-		printCost(distance,visited, parent);
+		return printCost(distance,visited, parent);
 		
 	}
 	
-	public static void printDist(int[] distance, boolean[] visited, int[] parent) {
+	public static int[] printDist(int[] distance, boolean[] visited, int[] parent) {
 		for(int i=0; i < distance.length; i++) {
 			if(distance[i] != Integer.MAX_VALUE)
 				System.out.print(distance[i] + "\t");
@@ -57,39 +58,57 @@ public class Dijkstra {
 				System.out.print("INF\t");
 		}
 		System.out.print("\n");
+		return distance;
 	}
 	
-	public static void printVisited(int[] distance, boolean[] visited, int[] parent) {
+	public static boolean[] printVisited(int[] distance, boolean[] visited, int[] parent) {
 		for(int i=0; i < distance.length; i++) {
 			System.out.print(visited[i] + "\t");
 		}
 		System.out.print("\n");
+		return visited;
 	}
 	
-	public static void printParent(int[] distance, boolean[] visited, int[] parent) {
+	public static int[] printParent(int[] distance, boolean[] visited, int[] parent) {
 		for(int i=0; i < distance.length; i++) {
 			System.out.print(parent[i] + "\t");
 		}
 		System.out.print("\n");
+		return parent;
 	}
 	
-	public static void printCost(int[] distance, boolean[] visited, int[] parent) {
-		printDist(distance, visited, parent);
+	public static int[] printCost(int[] distance, boolean[] visited, int[] parent) {
+		int[] x = printDist(distance, visited, parent);
 		//printVisited(distance, visited, parent);
 		//printParent(distance, visited, parent);
-		System.out.println("-----------------------------------------------------------------------------");
+		printDivider(distance.length);
+		
+		return x;
 	}
 	
-	public static void printAllPairsDijkstra(int[][] adjacencyMatrix) {
+	public static int[][] printAllPairsDijkstra(int[][] adjacencyMatrix) {
+		int[][] result = new int[adjacencyMatrix.length][adjacencyMatrix.length];
+		
 		System.out.print("\t");
 		for(int i =0; i < adjacencyMatrix.length; i++) {
 			System.out.print((i+1)+"\t");
 		}
-		System.out.println("\n-----------------------------------------------------------------------------");
+		System.out.print("\n");
+		printDivider(adjacencyMatrix.length);
 		for(int i = 0; i < adjacencyMatrix.length; i++) {
 			System.out.print("ROW " + (i+1) + "|\t");
-			dijkstra(adjacencyMatrix, i);
+			result[i] = dijkstra(adjacencyMatrix, i);
+
 		}
+		
+		return result;
+	}
+	
+	public static void printDivider(int size) {
+		for(int i = 0; i < size; i++) {
+			System.out.print("---------");
+		}
+		System.out.print("\n");
 	}
 	
 	public static void main(String[] args) {
@@ -105,7 +124,14 @@ public class Dijkstra {
                 { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
                 { 0, 0, 2, 0, 0, 0, 6, 7, 0 }
             };
+
 		
-		printAllPairsDijkstra(adjacencyMatrix);
+		int[][] x = printAllPairsDijkstra(adjacencyMatrix);
+		for(int i = 0; i < x.length; i++) {
+			for(int j = 0; j < x.length; j++) {
+				System.out.print(x[i][j] + ",\t");
+			}
+			System.out.println();
+		}
 	}
 }

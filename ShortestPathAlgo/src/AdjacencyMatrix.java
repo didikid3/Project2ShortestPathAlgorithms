@@ -41,11 +41,11 @@ public class AdjacencyMatrix {
 		
 		for(int i = 0; i < size; i++){
 			for(int j = 0; j < size; j++) {
-				//Calculate a value 1 or 2
-				//Value 1 represents no edge between nodes
-				path = (int)Math.floor(Math.random()*2+1);
+				//Calculate a value 1-3
+				//Value 3 represents no edge between nodes
+				path = (int)Math.floor(Math.random()*3+1);
 				
-				if(path == 1) {
+				if(path == 3) {
 					matrix[i][j] = Integer.MAX_VALUE;
 				}
 				else {
