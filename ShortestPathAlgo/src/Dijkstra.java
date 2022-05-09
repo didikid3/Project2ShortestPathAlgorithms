@@ -51,6 +51,7 @@ public class Dijkstra {
 	}
 	
 	public static int[] printDist(int[] distance, boolean[] visited, int[] parent) {
+		
 		for(int i=0; i < distance.length; i++) {
 			if(distance[i] != Integer.MAX_VALUE)
 				System.out.print(distance[i] + "\t");
@@ -78,10 +79,11 @@ public class Dijkstra {
 	}
 	
 	public static int[] printCost(int[] distance, boolean[] visited, int[] parent) {
-		int[] x = printDist(distance, visited, parent);
+		int[] x =  distance;
+		//printDist(distance, visited, parent);
 		//printVisited(distance, visited, parent);
 		//printParent(distance, visited, parent);
-		printDivider(distance.length);
+		//printDivider(distance.length);
 		
 		return x;
 	}
@@ -89,14 +91,17 @@ public class Dijkstra {
 	public static int[][] printAllPairsDijkstra(int[][] adjacencyMatrix) {
 		int[][] result = new int[adjacencyMatrix.length][adjacencyMatrix.length];
 		
+		/*
 		System.out.print("\t");
 		for(int i =0; i < adjacencyMatrix.length; i++) {
 			System.out.print((i+1)+"\t");
 		}
 		System.out.print("\n");
 		printDivider(adjacencyMatrix.length);
+		*/
+		
 		for(int i = 0; i < adjacencyMatrix.length; i++) {
-			System.out.print("ROW " + (i+1) + "|\t");
+			//System.out.print("ROW " + (i+1) + "|\t");
 			result[i] = dijkstra(adjacencyMatrix, i);
 
 		}
@@ -126,12 +131,17 @@ public class Dijkstra {
             };
 
 		
-		int[][] x = printAllPairsDijkstra(adjacencyMatrix);
+		AdjacencyMatrix v = new AdjacencyMatrix(512);
+		v.generateRandom(38);
+		int[][] x = printAllPairsDijkstra(v.getMatrix());
+		
+		
 		for(int i = 0; i < x.length; i++) {
 			for(int j = 0; j < x.length; j++) {
 				System.out.print(x[i][j] + ",\t");
 			}
 			System.out.println();
 		}
+		
 	}
 }
