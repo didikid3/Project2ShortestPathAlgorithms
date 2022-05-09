@@ -3,12 +3,13 @@ public class Runner {
 
 	public static void main(String[] args) {
 		int size = 8;
-		double timeDijkstra = 0;
-		double timeFlyodWarshall = 0;
+		long timeDijkstra = 0;
+		long timeFlyodWarshall = 0;
 		int probability;
 		int[][] matrix;
+		AdjacencyMatrix x;
 		while (true) {
-			AdjacencyMatrix x = new AdjacencyMatrix(size);
+			x = new AdjacencyMatrix(size);
 
 			timeDijkstra = 0;
 			timeFlyodWarshall = 0;
@@ -42,6 +43,7 @@ public class Runner {
 			System.out.println("Dijkstra: " + timeDijkstra);
 			System.out.println("Flyod: " + timeFlyodWarshall);
 			System.out.println("Matrix Size: " + size);
+			System.out.println("----------------------------");
 			
 			
 			size = size * 2;
